@@ -1,9 +1,11 @@
 'use strict';
 
-let gulp = require('gulp'),
+/** Default SASS/CSS task */
+
+var gulp = require('gulp'),
   util = require('gulp-util');
 
-let taskName = 'css',
+var taskName = 'css',
   taskConfig = {
     src: [],
     srcBase: './source/',
@@ -12,11 +14,12 @@ let taskName = 'css',
       autoprefixer: 'last 2 version' //Change to IE9+
     }
   },
-  task(config, cb, changedFile) => {
-    let plumber = require('gulp-plumber'),
+
+  task = function (config, cb, changedFile) {
+    var plumber = require('gulp-plumber'),
       sourcemaps = require('gulp-sourcemaps'),
       sass = require('gulp-sass'),
-      autoprefixer = require('gulp-autoprefixer');
+      autoprefixer = require('autoprefixer');
 
       gulp.src(config.src, {base: config.srcBase})
         .pipe(plumber())
@@ -28,7 +31,7 @@ let taskName = 'css',
         .on('end', cb);
   };
 
-gulp.task(taskName, (cb) => {
+gulp.task(taskName, function(cb) {
   return task(taskConfig,cb);
 });
 
